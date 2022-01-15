@@ -1,0 +1,16 @@
+name
+team
+age
+wins
+loses
+games played
+win percentage
+minutes played
+(three point) field goal made/attempt/percentage
+free throws made/attempt/percentage
+(offensive/defensive) rebounds
+assists
+turnovers
+steals
+blocks
+points

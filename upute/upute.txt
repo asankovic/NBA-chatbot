@@ -1,0 +1,39 @@
+INSTALACIJA:
+
+potrebne biblioteke su spade, chatterbot, spacy, pandas, requests i time
+zbog biblioteke chatterbot je potrebno da verzija Pythona bude >=3.4, <=3.8
+(osobo preporucujem Python 3.8.0 jer je s njim radeno;
+npr. kod verzije 3.7.0 postoji greska koja je ispravljena tek u 3.7.2 i zbog koje chatterbot ne radi)
+
+nakon instaliranja biblioteka, potrebno je preuzeti rijecnik koristeci naredbu:
+python -m spacy download en_core_web_sm
+
+!!VAZNO!!
+posto chatterbot interno koristi spacy biblioteku, a rijecnik se prije nazivao samo "en" (sad "en_core_web_sm"),
+potrebno je u chatterbotovim datotekama, konkretno tagging.py zamijeniti liniju 13 sa:
+
+if self.language.ISO_639_1.lower() == 'en':
+    self.nlp = spacy.load('en_core_web_sm')
+else:
+    self.nlp = spacy.load(self.language.ISO_639_1.lower())
+
+detaljnije: https://stackoverflow.com/questions/66087475/chatterbot-error-oserror-e941-cant-find-model-en
+
+!!!
+----------------------------------------------------------------------------------------------------------------------------------------
+KORISTENJE BOTA:
+
+postoje 2 datoteke koje sluze kao spremista podataka i obje se mogu bez opasnosti obrisati, a to su:
+db.sqlite3-chatterbot ce morati ponovo "nauciti" odgovore na pitanja ako se ovo obrise
+player_stats.csv-posotji sansa da pristup NBA API-ju bude blokiran pa se nece moci dohvatiti podaci o igracima
+PREPORUKA: preimenovati datoteke ako se zeli vidjeti alternativni rad aplikacije, zadana imena koja aplikacija koristi su gore navedena
+
+POKRETANJE:
+
+U jednom terminalu se pokrene NbaScout.py, a u drugom NbaBot.py
+Korisnik komunicira s NbaBot.py, kroz NbaScout.py se moze pratiti razmjena poruka
+Komunicira se na engleskom jeziku, a teme (statistika) i igraci koji bi trebali biti dostupni su navedeni u teme.txt i igraci.txt 
+Imena se moraju pisati velikim pocetnim slovima inace se nece tretirati kao osoba i nece dati rezultate
+Moze se pitati za vise tema u istoj recenici
+Ako se ne dobije odgovor, mozda treba drugacije formulirati recenicu (bot nije savrsen pa mozda na neke nece dati odgovor)
+Za zavrsetak rada potrebno je pozdraviti bota tako da pozdrav sadrzi "bye" (velika i mala slova nisu bitna)
